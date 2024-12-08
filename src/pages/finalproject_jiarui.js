@@ -122,7 +122,7 @@ const FinalProject = () => {
                             <li>
                                 <strong>Maternal Mortality Ratio (MMR):</strong> The MMR is expressed
                                 as the number of maternal deaths per 100,000 live births. It is a
-                                critical indicator of a country's healthcare quality.
+                                critical indicator of a country&apos;s healthcare quality.
                             </li>
                             <li>
                                 <strong>Global Numbers:</strong> Globally, over 295,000 maternal

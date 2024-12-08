@@ -1,14 +1,12 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, useMemo } from "react";
 import * as d3 from "d3";
 
 const BarChart = ({ data, selectedCountry }) => {
   const svgRef = useRef();
   const [dimensions, setDimensions] = useState({ width: 800, height: 400 });
 
-
-  useEffect(() => {
-    // Define the fixed order of `cause_name`
-    const causeNames = [
+  const causeNames = useMemo(
+    () => [
       "Maternal hemorrhage",
       "Maternal abortion and miscarriage",
       "Maternal hypertensive disorders",
@@ -19,8 +17,11 @@ const BarChart = ({ data, selectedCountry }) => {
       "Other direct maternal disorders",
       "Maternal sepsis and other maternal infections",
       "Maternal deaths aggravated by HIV/AIDS",
-    ];
+    ],
+    []
+  );
 
+  useEffect(() => {
     // Resize dynamically based on parent container
     const resizeObserver = new ResizeObserver((entries) => {
       const { width, height } = entries[0].contentRect;
@@ -130,7 +131,7 @@ const BarChart = ({ data, selectedCountry }) => {
       .on("mouseout", () => {
         d3.select("#tooltip").style("opacity", 0);
       });
-  }, [data, selectedCountry, dimensions]);
+  }, [data, selectedCountry, dimensions, causeNames]);
 
   return (
     <div>
