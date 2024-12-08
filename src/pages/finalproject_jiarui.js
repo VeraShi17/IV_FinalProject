@@ -199,13 +199,15 @@ const FinalProject = () => {
                                 >
                                     <option value="Global">Global</option>
                                     {[...availableCountries]
-                                        .filter((country) => country !== "Global") // Exclude "Global" from availableCountries
+                                        .filter((country) => country !== "Global") // Exclude "Global"
+                                        .sort((a, b) => a.localeCompare(b)) // Sort alphabetically
                                         .map((country) => (
                                             <option key={country} value={country}>
                                                 {country}
                                             </option>
                                         ))}
                                 </select>
+
 
                             </div>
                         </div>
