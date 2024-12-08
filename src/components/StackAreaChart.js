@@ -12,12 +12,16 @@ const StackAreaChart = ({ data, selectedCountry }) => {
             setDimensions({ width, height: height || 400 }); // Default height if unavailable
         });
 
-        if (svgRef.current) {
-            resizeObserver.observe(svgRef.current.parentNode);
+        const currentSvgRef = svgRef.current; // Copy ref value to a local variable
+
+        if (currentSvgRef) {
+            resizeObserver.observe(currentSvgRef.parentNode);
         }
 
         return () => {
-            if (svgRef.current) resizeObserver.unobserve(svgRef.current.parentNode);
+            if (currentSvgRef) {
+                resizeObserver.unobserve(currentSvgRef.parentNode);
+            }
         };
     }, []);
 

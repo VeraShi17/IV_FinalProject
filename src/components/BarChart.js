@@ -5,33 +5,35 @@ const BarChart = ({ data, selectedCountry }) => {
   const svgRef = useRef();
   const [dimensions, setDimensions] = useState({ width: 800, height: 400 });
 
-  // Define the fixed order of `cause_name`
-  const causeNames = [
-    "Maternal hemorrhage",
-    "Maternal abortion and miscarriage",
-    "Maternal hypertensive disorders",
-    "Maternal obstructed labor and uterine rupture",
-    "Ectopic pregnancy",
-    "Indirect maternal deaths",
-    "Late maternal deaths",
-    "Other direct maternal disorders",
-    "Maternal sepsis and other maternal infections",
-    "Maternal deaths aggravated by HIV/AIDS",
-  ];
 
   useEffect(() => {
+    // Define the fixed order of `cause_name`
+    const causeNames = [
+      "Maternal hemorrhage",
+      "Maternal abortion and miscarriage",
+      "Maternal hypertensive disorders",
+      "Maternal obstructed labor and uterine rupture",
+      "Ectopic pregnancy",
+      "Indirect maternal deaths",
+      "Late maternal deaths",
+      "Other direct maternal disorders",
+      "Maternal sepsis and other maternal infections",
+      "Maternal deaths aggravated by HIV/AIDS",
+    ];
+
     // Resize dynamically based on parent container
     const resizeObserver = new ResizeObserver((entries) => {
       const { width, height } = entries[0].contentRect;
       setDimensions({ width, height: height || 400 }); // Default height if unavailable
     });
 
-    if (svgRef.current) {
-      resizeObserver.observe(svgRef.current.parentNode);
+    const currentSvg = svgRef.current;
+    if (currentSvg) {
+      resizeObserver.observe(currentSvg.parentNode);
     }
 
     return () => {
-      if (svgRef.current) resizeObserver.unobserve(svgRef.current.parentNode);
+      if (currentSvg) resizeObserver.unobserve(currentSvg.parentNode);
     };
   }, []);
 
